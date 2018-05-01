@@ -17,6 +17,8 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="6.2.2" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="3.2.0" />
+    <PackageReference Include="Dapper" Version="1.50.4" />
+    <PackageReference Include="LaYumba.Functional" Version="0.9.1" />
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.2.1" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.0.2" />
@@ -33,6 +35,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Samples.ApplicationLayer\Samples.ApplicationLayer.csproj" />
     <ProjectReference Include="..\Samples.DomainLayer\Samples.DomainLayer.csproj" />
+    <ProjectReference Include="..\Samples.Functional\Samples.Functional.csproj" />
     <ProjectReference Include="..\Samples.InfrastructureLayer\Samples.InfrastructureLayer.csproj" />
   </ItemGroup>
 

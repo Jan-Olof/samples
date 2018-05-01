@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Samples.DomainLayer", "Samp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Samples.InfrastructureLayer", "Samples.InfrastructureLayer\Samples.InfrastructureLayer.csproj", "{89FDD0F3-CA42-4D41-855A-5BC25F576414}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Samples.Functional", "Samples.Functional\Samples.Functional.csproj", "{A91A60D6-EB8A-48E6-99F0-5A78BA17FB57}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{89FDD0F3-CA42-4D41-855A-5BC25F576414}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{89FDD0F3-CA42-4D41-855A-5BC25F576414}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{89FDD0F3-CA42-4D41-855A-5BC25F576414}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A91A60D6-EB8A-48E6-99F0-5A78BA17FB57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A91A60D6-EB8A-48E6-99F0-5A78BA17FB57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A91A60D6-EB8A-48E6-99F0-5A78BA17FB57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A91A60D6-EB8A-48E6-99F0-5A78BA17FB57}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
