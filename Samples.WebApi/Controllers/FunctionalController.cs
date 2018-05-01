@@ -25,6 +25,9 @@ namespace Samples.WebApi.Controllers
 
         private DateTime now; // date validation
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FunctionalController" /> class.
+        /// </summary>
         public FunctionalController()
         {
             // TODO: Inject what is needed here.
@@ -33,7 +36,7 @@ namespace Samples.WebApi.Controllers
         /// <summary>
         /// Make a transfer.
         /// </summary>
-        [HttpPost, Route("api/Chapters6/transfers/future/particularized")]
+        [HttpPost]
         public IActionResult MakeFutureTransfer([FromBody] BookTransfer request)
             => Handle(request).Match(
                 Invalid: BadRequest,
