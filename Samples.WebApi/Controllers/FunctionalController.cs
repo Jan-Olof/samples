@@ -4,8 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Samples.Functional;
 using System;
-using System.Text.RegularExpressions;
 using static LaYumba.Functional.F;
+using static Samples.Functional.TransferFunctions;
 using Unit = System.ValueTuple;
 
 namespace Samples.WebApi.Controllers
@@ -17,8 +17,6 @@ namespace Samples.WebApi.Controllers
     [Route("api/Functional")]
     public class FunctionalController : Controller
     {
-        private static readonly Regex regex = new Regex("^[A-Z]{6}[A-Z1-9]{5}$"); // bic code validation
-
         private readonly string _connString; // persistence
 
         private readonly ILogger<FunctionalController> _logger;
@@ -68,15 +66,7 @@ namespace Samples.WebApi.Controllers
         }
 
         private Validation<BookTransfer> Validate(BookTransfer cmd)
-            => ValidateBic(cmd)
-                .Bind(transfer => transfer.ValidateDate(_now));
-
-        // bic code validation
-        private Validation<BookTransfer> ValidateBic(BookTransfer cmd)
-        {
-            if (!regex.IsMatch(cmd.Bic.ToUpper()))
-                return Errors.InvalidBic;
-            return cmd;
-        }
+            => cmd.ValidateBic(BicCodeRegex())
+                .Bind(c => c.ValidateDate(_now));
     }
 }
