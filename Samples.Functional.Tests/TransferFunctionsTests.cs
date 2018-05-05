@@ -17,7 +17,7 @@ namespace Samples.Functional.Tests
             var bookTransfer = SampleBookTransfers.CreateBookTransfer(new DateTime(2018, 5, 4, 0, 0, 0), "bic");
 
             // When
-            var result = bookTransfer.ValidateBic(TransferFunctions.BicCodeRegex());
+            var result = bookTransfer.ValidateBic(Settings.BicCodeRegex());
 
             // Then
             Assert.IsFalse(result.IsValid);
@@ -33,7 +33,7 @@ namespace Samples.Functional.Tests
             var bookTransfer = SampleBookTransfers.CreateBookTransfer(new DateTime(2018, 5, 4, 0, 0, 0));
 
             // When
-            var result = bookTransfer.ValidateBic(TransferFunctions.BicCodeRegex());
+            var result = bookTransfer.ValidateBic(Settings.BicCodeRegex());
 
             // Then
             Assert.IsTrue(result.IsValid);

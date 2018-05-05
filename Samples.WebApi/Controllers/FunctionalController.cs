@@ -1,12 +1,7 @@
-﻿using Dapper;
-using LaYumba.Functional;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Samples.Functional;
 using System;
-using static LaYumba.Functional.F;
-using static Samples.Functional.TransferFunctions;
-using Unit = System.ValueTuple;
 
 namespace Samples.WebApi.Controllers
 {
@@ -38,15 +33,15 @@ namespace Samples.WebApi.Controllers
         /// </summary>
         [HttpPost]
         public IActionResult MakeFutureTransfer([FromBody] BookTransfer request)
-            => Handle(request).Match(
+            => request.Handle(_now, _connString).Match(
                 Invalid: BadRequest,
                 Valid: result => result.Match(
                     Exception: OnFaulted,
                     Success: _ => Ok()));
 
-        private Validation<Exceptional<Unit>> Handle(BookTransfer request)
-            => Validate(request)
-                .Map(Save);
+        //private Validation<Exceptional<Unit>> Handle(BookTransfer request)
+        //    => Validate(request)
+        //        .Map(Save);
 
         private IActionResult OnFaulted(Exception ex)
         {
@@ -54,19 +49,19 @@ namespace Samples.WebApi.Controllers
             return StatusCode(500, Errors.UnexpectedError);
         }
 
-        // persistence
-        private Exceptional<Unit> Save(BookTransfer transfer)
-        {
-            try
-            {
-                ConnectionHelper.Connect(_connString, c => c.Execute("INSERT ...", transfer));
-            }
-            catch (Exception ex) { return ex; }
-            return Unit();
-        }
+        //// persistence
+        //private Exceptional<Unit> Save(BookTransfer transfer)
+        //{
+        //    try
+        //    {
+        //        ConnectionHelper.Connect(_connString, c => c.Execute("INSERT ...", transfer));
+        //    }
+        //    catch (Exception ex) { return ex; }
+        //    return Unit();
+        //}
 
-        private Validation<BookTransfer> Validate(BookTransfer cmd)
-            => cmd.ValidateBic(BicCodeRegex())
-                .Bind(c => c.ValidateDate(_now));
+        //private Validation<BookTransfer> Validate(BookTransfer cmd)
+        //    => cmd.ValidateBic(Settings.BicCodeRegex())
+        //        .Bind(c => c.ValidateDate(_now));
     }
 }
