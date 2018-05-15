@@ -21,23 +21,26 @@ namespace Samples.WebApi.Controllers
         /// <summary>
         /// Initializes a new instance of the <see cref="FunctionalController" /> class.
         /// </summary>
-        public FunctionalController(ILogger<FunctionalController> logger, string connString, DateTime now)
+        public FunctionalController()
         {
-            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            _connString = connString ?? throw new ArgumentNullException(nameof(connString));
-            _now = now;
+            //_logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _connString = "Data Source=(LocalDb)\\MSSQLLocalDB;Initial Catalog=FunctionalSamples;";
+            _now = DateTime.Now;
         }
 
         /// <summary>
         /// Make a transfer.
         /// </summary>
         [HttpPost]
-        public IActionResult MakeFutureTransfer([FromBody] BookTransfer request)
-            => request.Handle(_now, _connString).Match(
+        public IActionResult MakeFutureTransfer([FromBody] string a) // TODO: Can't use BookTransfer here. Create dto and change BookTransfer to real data object.
+        {
+            var transfer = new BookTransfer();
+            return transfer.Handle(_now, _connString).Match(
                 Invalid: BadRequest,
                 Valid: result => result.Match(
                     Exception: OnFaulted,
                     Success: _ => Ok()));
+        }
 
         //private Validation<Exceptional<Unit>> Handle(BookTransfer request)
         //    => Validate(request)

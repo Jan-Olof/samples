@@ -17,7 +17,7 @@ namespace Samples.Functional
         {
             try
             {
-                ConnectionHelper.Connect(connString, c => c.Execute("INSERT ...", transfer));
+                ConnectionHelper.Connect(connString, c => c.Execute("INSERT INTO... ", transfer));
             }
             catch (Exception ex) { return ex; }
             return Unit();
@@ -26,5 +26,7 @@ namespace Samples.Functional
         private static Validation<BookTransfer> Validate(this BookTransfer cmd, DateTime now)
             => cmd.ValidateBic(Settings.BicCodeRegex())
                 .Bind(c => c.ValidateDate(now));
+
+        // TODO: Create new "transfer" data objects instead of the ones used now (that are DTOs).
     }
 }

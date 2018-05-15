@@ -46,6 +46,8 @@ namespace Samples.WebApi
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             string appInsightsKey = _configuration["ApplicationInsights:InstrumentationKey"];
+            loggerFactory.AddConsole(_configuration.GetSection("Logging"));
+            loggerFactory.AddDebug();
             loggerFactory.AddApplicationInsights(new ApplicationInsightsSettings
             {
                 DeveloperMode = true,
