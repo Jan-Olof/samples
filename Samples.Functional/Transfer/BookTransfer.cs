@@ -5,18 +5,25 @@ namespace Samples.Functional.Transfer
 {
     public struct BookTransfer
     {
-        private BookTransfer(Option<TransferDate> date)
+        private BookTransfer(Option<TransferDate> date, Option<Amount> amount)
         {
-            Date = date;
+            DateOfTransfer = date;
+            AmountToTransfer = amount;
         }
 
-        public Option<TransferDate> Date { get; }
+        public Option<Amount> AmountToTransfer { get; }
 
-        public static BookTransfer Of(DateTime transferDate, DateTime now)
+        public Option<TransferDate> DateOfTransfer { get; }
+
+        public static BookTransfer Of(
+            DateTime dateOfTransfer,
+            DateTime now,
+            decimal amountToTransfer)
         {
-            var date = TransferDate.Of(transferDate, now);
+            var date = TransferDate.Of(dateOfTransfer, now);
+            var amount = Amount.Of(amountToTransfer);
 
-            return new BookTransfer(date);
+            return new BookTransfer(date, amount);
         }
     }
 }

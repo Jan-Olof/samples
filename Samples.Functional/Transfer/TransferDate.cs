@@ -13,7 +13,9 @@ namespace Samples.Functional.Transfer
         private DateTime Value { get; }
 
         public static Option<TransferDate> Of(DateTime transferDate, DateTime now)
-            => IsValid(transferDate, now) ? Some(new TransferDate(transferDate)) : None;
+            => IsValid(transferDate, now)
+                ? Some(new TransferDate(transferDate))
+                : None;
 
         private static bool IsValid(DateTime transferDate, DateTime now)
             => transferDate.Date > now.Date;
