@@ -12,7 +12,7 @@ namespace Samples.Functional.Transfer
 
         private DateTime Value { get; }
 
-        public static Option<TransferDate> Of(DateTime transferDate, DateTime now)
+        public static Option<TransferDate> Of(DateTime transferDate, DateTime now) // TODO: Change to Validation<TransferDate>
             => IsValid(transferDate, now)
                 ? Some(new TransferDate(transferDate))
                 : None;

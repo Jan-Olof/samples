@@ -10,7 +10,7 @@ namespace Samples.Functional.Transfer
 
         private decimal Value { get; }
 
-        public static Option<Amount> Of(decimal value)
+        public static Option<Amount> Of(decimal value) // TODO: Change to Validation<Amount>
              => IsValid(value)
                 ? Some(new Amount(value))
                 : None;
