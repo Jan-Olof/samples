@@ -12,12 +12,12 @@ namespace Samples.Functional.Transfer
 
         private DateTime Value { get; }
 
-        public static Option<TransferDate> Of(DateTime transferDate, DateTime now) // TODO: Change to Validation<TransferDate>
+        public static Validation<TransferDate> Of(DateTime transferDate, Func<DateTime> now)
             => IsValid(transferDate, now)
-                ? Some(new TransferDate(transferDate))
-                : None;
+                ? Valid(new TransferDate(transferDate))
+                : Invalid(Errors.TransferDateIsPast);
 
-        private static bool IsValid(DateTime transferDate, DateTime now)
-            => transferDate.Date > now.Date;
+        private static bool IsValid(DateTime transferDate, Func<DateTime> now)
+            => transferDate.Date > now().Date;
     }
 }

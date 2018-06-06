@@ -10,10 +10,10 @@ namespace Samples.Functional.Transfer
 
         private decimal Value { get; }
 
-        public static Option<Amount> Of(decimal value) // TODO: Change to Validation<Amount>
+        public static Validation<Amount> Of(decimal value)
              => IsValid(value)
-                ? Some(new Amount(value))
-                : None;
+                ? Valid(new Amount(value))
+                : Invalid(Errors.NegativeAmount);
 
         private static bool IsValid(decimal value)
             => value > 0;

@@ -16,16 +16,16 @@ namespace Samples.WebApi.Controllers
 
         private readonly ILogger<FunctionalController> _logger;
 
-        private readonly DateTime _now; // date validation
+        private readonly Func<DateTime> _now; // date validation
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FunctionalController" /> class.
         /// </summary>
-        public FunctionalController(ILogger<FunctionalController> logger)
+        public FunctionalController(ILogger<FunctionalController> logger, Func<DateTime> now)
         {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _connString = "Data Source=(LocalDb)\\MSSQLLocalDB;Initial Catalog=FunctionalSamples;";
-            _now = DateTime.Now;
+            _now = now;
         }
 
         /// <summary>
@@ -36,13 +36,13 @@ namespace Samples.WebApi.Controllers
         {
             // TODO: Fix
 
-            //return transfer.Handle(_now, _connString).Match(
-            //    Invalid: BadRequest,
-            //    Valid: result => result.Match(
-            //        Exception: OnFaulted,
-            //        Success: _ => Ok()));
+            return transfer.Handle(_now, _connString).Match(
+                Invalid: BadRequest,
+                Valid: result => result.Match(
+                    Exception: OnFaulted,
+                    Success: _ => Ok()));
 
-            return Ok();
+            //return Ok();
         }
 
         //private Validation<Exceptional<Unit>> Handle(BookTransfer request)

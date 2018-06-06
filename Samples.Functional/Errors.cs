@@ -17,6 +17,9 @@ namespace Samples.Functional
         public static InvalidBicError InvalidBic
             => new InvalidBicError();
 
+        public static NegativeAmountError NegativeAmount
+            => new NegativeAmountError();
+
         public static TransferDateIsPastError TransferDateIsPast
             => new TransferDateIsPastError();
 
@@ -30,37 +33,43 @@ namespace Samples.Functional
     public sealed class AccountNotActiveError : Error
     {
         public override string Message { get; }
-            = "The account is not active; the requested operation cannot be completed";
+           = "The account is not active; the requested operation cannot be completed";
     }
 
     public sealed class CannotActivateClosedAccountError : Error
     {
         public override string Message { get; }
-            = "Cannot activate an account that has been closed";
+           = "Cannot activate an account that has been closed";
     }
 
     public sealed class InsufficientBalanceError : Error
     {
         public override string Message { get; }
-            = "Insufficient funds to fulfil the requested operation";
+           = "Insufficient funds to fulfil the requested operation";
     }
 
     public sealed class InvalidBicError : Error
     {
         public override string Message { get; }
-            = "The beneficiary's BIC/SWIFT code is invalid";
+           = "The beneficiary's BIC/SWIFT code is invalid";
+    }
+
+    public sealed class NegativeAmountError : Error
+    {
+        public override string Message { get; }
+           = "The amount is a negative value.";
     }
 
     public sealed class TransferDateIsPastError : Error
     {
         public override string Message { get; }
-            = "Transfer date cannot be in the past";
+           = "Transfer date cannot be in the past";
     }
 
     public sealed class UnexpectedError : Error
     {
         public override string Message { get; }
-            = "An unexpected error has occurred";
+           = "An unexpected error has occurred";
     }
 
     public sealed class UnknownAccountId : Error
@@ -71,7 +80,7 @@ namespace Samples.Functional
         }
 
         public override string Message
-            => $"No account with id {Id} was found";
+           => $"No account with id {Id} was found";
 
         private Guid Id { get; }
     }

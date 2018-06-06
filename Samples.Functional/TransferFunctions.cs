@@ -1,29 +1,42 @@
-﻿//using LaYumba.Functional;
-//using System;
-//using System.Text.RegularExpressions;
-//using static LaYumba.Functional.F;
+﻿using LaYumba.Functional;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+using static LaYumba.Functional.F;
 
-//namespace Samples.Functional
-//{
-//    /// <summary>
-//    /// Functions for BookTransfer.
-//    /// </summary>
-//    public static class TransferFunctions
-//    {
-//        /// <summary>
-//        /// Bic code validation.
-//        /// </summary>
-//        public static Validation<BookTransfer> ValidateBic(this BookTransfer transfer, Regex regex)
-//            => Some(transfer)
-//                .Where(t => regex.IsMatch(t.Bic.ToUpper()))
-//                .Match<Validation<BookTransfer>>(() => Errors.InvalidBic, t => t);
+namespace Samples.Functional
+{
+    /// <summary>
+    /// Functions for BookTransfer.
+    /// </summary>
+    public static class TransferFunctions
+    {
+        public static IEnumerable<T> AddMany<T>(this IEnumerable<T> e, IEnumerable<T> n)
+        {
+            var list = e.ToList();
+            list.AddRange(n);
+            return list;
+        }
 
-//        /// <summary>
-//        /// Date validation.
-//        /// </summary>
-//        public static Validation<BookTransfer> ValidateDate(this BookTransfer transfer, DateTime now)
-//            => Some(transfer)
-//                .Where(t => t.Date.Date > now.Date)
-//                .Match<Validation<BookTransfer>>(() => Errors.TransferDateIsPast, t => t);
-//    }
-//}
+        /// <summary>
+        /// Bic code validation.
+        /// </summary>
+        public static Validation<BookTransferDto> ValidateBic(this BookTransferDto transfer, Regex regex)
+            => Some(transfer)
+                .Where(t => regex.IsMatch(t.Bic.ToUpper()))
+                .Match<Validation<BookTransferDto>>(() => Errors.InvalidBic, t => t);
+
+        /// <summary>
+        /// Date validation.
+        /// </summary>
+        public static Validation<BookTransferDto> ValidateDate(this BookTransferDto transfer, DateTime now)
+            => Some(transfer)
+                .Where(t => t.Date.Date > now.Date)
+                .Match<Validation<BookTransferDto>>(() => Errors.TransferDateIsPast, t => t);
+
+        //public static Validation<BookTransfer> ValidateDate(this BookTransfer transfer, Validation<Amount> amount)
+        //{
+        //}
+    }
+}
