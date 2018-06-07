@@ -19,6 +19,11 @@ namespace Samples.Functional
             return list;
         }
 
+        public static T GetValidObject<T>(this Validation<T> validation)
+        {
+            return validation.Match(e => throw new InvalidOperationException("The object is invalid."), d => d); // TODO: Test!
+        }
+
         /// <summary>
         /// Bic code validation.
         /// </summary>

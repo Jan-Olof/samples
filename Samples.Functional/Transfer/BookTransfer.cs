@@ -1,21 +1,21 @@
 ﻿using LaYumba.Functional;
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using static LaYumba.Functional.F;
 
 namespace Samples.Functional.Transfer
 {
     public struct BookTransfer
     {
-        private BookTransfer(Validation<TransferDate> date, Validation<Amount> amount)
+        private BookTransfer(TransferDate date, Amount amount)
         {
             DateOfTransfer = date;
             AmountToTransfer = amount;
         }
 
-        public Validation<Amount> AmountToTransfer { get; } // TODO: Change to Amount
+        public Amount AmountToTransfer { get; }
 
-        public Validation<TransferDate> DateOfTransfer { get; } // TODO: Change to TransferDate
+        public TransferDate DateOfTransfer { get; }
 
         public static Validation<BookTransfer> Of(
             DateTime dateOfTransfer,
@@ -25,14 +25,20 @@ namespace Samples.Functional.Transfer
             var date = TransferDate.Of(dateOfTransfer, now);
             var amount = Amount.Of(amountToTransfer);
 
-            // TODO: Use IsValid to see if all are valid. Return errors if not valid.
+            return IsValid(amount, date)
+                ? Valid(new BookTransfer(date.GetValidObject(), amount.GetValidObject()))
+                : Invalid(new List<Error>()); // TODO: Fix this!!!
 
-            // Use this if not valid.
-            var e = new List<Error>();
-            e = date.Match(n => e.AddMany(n).ToList(), d => e);
-
-            // If valid change types.
-            return new BookTransfer(date, amount);
+            //// Use this if not valid.
+            //var e = new List<Error>();
+            //e = date.Match(n => e.AddMany(n).ToList(), d => e);
         }
+
+        //private static IEnumerable<Error> GetErrors(Validation<Amount> amount, Validation<TransferDate> date)
+        //{
+        //}
+
+        private static bool IsValid(Validation<Amount> amount, Validation<TransferDate> date)
+            => amount.IsValid && date.IsValid;
     }
 }

@@ -13,7 +13,7 @@ namespace Samples.Functional.Transfer
         private DateTime Value { get; }
 
         public static Validation<TransferDate> Of(DateTime transferDate, Func<DateTime> now)
-            => IsValid(transferDate, now)
+                    => IsValid(transferDate, now)
                 ? Valid(new TransferDate(transferDate))
                 : Invalid(Errors.TransferDateIsPast);
 
