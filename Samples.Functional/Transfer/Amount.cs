@@ -8,7 +8,7 @@ namespace Samples.Functional.Transfer
         public Amount(decimal value)
             => Value = value;
 
-        private decimal Value { get; }
+        public decimal Value { get; }
 
         public static Validation<Amount> Of(decimal value)
              => IsValid(value)

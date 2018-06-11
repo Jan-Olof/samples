@@ -12,11 +12,16 @@ namespace Samples.Functional
     /// </summary>
     public static class TransferFunctions
     {
-        public static IEnumerable<T> AddMany<T>(this IEnumerable<T> e, IEnumerable<T> n)
+        public static IEnumerable<T> AddMany<T>(this IEnumerable<T> e, IEnumerable<T> n) // TODO: Move
         {
             var list = e.ToList();
             list.AddRange(n);
             return list;
+        }
+
+        public static IEnumerable<Error> GetErrors<T>(this Validation<T> validation)
+        {
+            return validation.Match(e => e, d => new List<Error>()); // TODO: Test!
         }
 
         public static T GetValidObject<T>(this Validation<T> validation)
@@ -39,9 +44,5 @@ namespace Samples.Functional
             => Some(transfer)
                 .Where(t => t.Date.Date > now.Date)
                 .Match<Validation<BookTransferDto>>(() => Errors.TransferDateIsPast, t => t);
-
-        //public static Validation<BookTransfer> ValidateDate(this BookTransfer transfer, Validation<Amount> amount)
-        //{
-        //}
     }
 }

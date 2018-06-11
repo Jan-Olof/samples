@@ -7,7 +7,7 @@ namespace Samples.Functional.Transfer
 {
     public struct BookTransfer
     {
-        private BookTransfer(TransferDate date, Amount amount)
+        private BookTransfer(Amount amount, TransferDate date)
         {
             DateOfTransfer = date;
             AmountToTransfer = amount;
@@ -26,17 +26,14 @@ namespace Samples.Functional.Transfer
             var amount = Amount.Of(amountToTransfer);
 
             return IsValid(amount, date)
-                ? Valid(new BookTransfer(date.GetValidObject(), amount.GetValidObject()))
-                : Invalid(new List<Error>()); // TODO: Fix this!!!
-
-            //// Use this if not valid.
-            //var e = new List<Error>();
-            //e = date.Match(n => e.AddMany(n).ToList(), d => e);
+                ? Valid(new BookTransfer(amount.GetValidObject(), date.GetValidObject()))
+                : Invalid(GetErrors(amount, date));
         }
 
-        //private static IEnumerable<Error> GetErrors(Validation<Amount> amount, Validation<TransferDate> date)
-        //{
-        //}
+        private static IEnumerable<Error> GetErrors(Validation<Amount> amount, Validation<TransferDate> date)
+            => new List<Error>()
+                .AddMany(amount.GetErrors())
+                .AddMany(date.GetErrors());
 
         private static bool IsValid(Validation<Amount> amount, Validation<TransferDate> date)
             => amount.IsValid && date.IsValid;

@@ -10,7 +10,7 @@ namespace Samples.Functional.Transfer
         private TransferDate(DateTime value)
             => Value = value;
 
-        private DateTime Value { get; }
+        public DateTime Value { get; }
 
         public static Validation<TransferDate> Of(DateTime transferDate, Func<DateTime> now)
                     => IsValid(transferDate, now)

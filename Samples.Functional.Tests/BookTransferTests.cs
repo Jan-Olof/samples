@@ -1,11 +1,30 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Linq;
 
 namespace Samples.Functional.Tests
 {
     [TestClass]
     public class BookTransferTests
     {
+        [TestMethod]
+        public void TestShouldCreateBookTransfer_invalid()
+        {
+            // Arrange
+            var date = new DateTime(2018, 6, 6);
+            var dto = SampleObjects.SampleBookTransferDtos.CreateBookTransferDto(date);
+            DateTime now() => new DateTime(2018, 6, 7);
+
+            // Act
+            var result = dto.CreateBookTransfer(now);
+
+            // Assert
+            Assert.IsFalse(result.IsValid);
+            var e = result.GetErrors();
+            Assert.AreEqual(1, e.Count());
+            Assert.AreEqual("Transfer date cannot be in the past", e.Single().Message);
+        }
+
         [TestMethod]
         public void TestShouldCreateBookTransfer_validated()
         {
@@ -18,6 +37,8 @@ namespace Samples.Functional.Tests
             var result = dto.CreateBookTransfer(now);
 
             // Assert
+            Assert.IsTrue(result.IsValid);
+            Assert.AreEqual(date, result.GetValidObject().DateOfTransfer.Value);
         }
     }
 }
