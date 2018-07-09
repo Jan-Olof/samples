@@ -5,7 +5,7 @@ namespace Samples.Functional.Transfer
 {
     public struct Amount
     {
-        public Amount(decimal value)
+        private Amount(decimal value)
             => Value = value;
 
         public decimal Value { get; }

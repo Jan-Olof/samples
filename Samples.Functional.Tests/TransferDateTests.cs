@@ -1,22 +1,22 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Samples.Functional.Transfer;
 using System;
 using System.Linq;
 
 namespace Samples.Functional.Tests
 {
     [TestClass]
-    public class BookTransferTests
+    public class TransferDateTests
     {
         [TestMethod]
         public void TestShouldCreateBookTransfer_invalid()
         {
             // Arrange
-            var date = new DateTime(2018, 6, 6);
-            var dto = SampleObjects.SampleBookTransferDtos.CreateBookTransferDto(date);
-            DateTime Now() => new DateTime(2018, 6, 7);
+            var date = new DateTime(2018, 6, 4);
+            DateTime Now() => new DateTime(2018, 6, 5);
 
             // Act
-            var result = dto.CreateBookTransfer(Now);
+            var result = TransferDate.Of(date, Now);
 
             // Assert
             Assert.IsFalse(result.IsValid);
@@ -30,15 +30,14 @@ namespace Samples.Functional.Tests
         {
             // Arrange
             var date = new DateTime(2018, 6, 6);
-            var dto = SampleObjects.SampleBookTransferDtos.CreateBookTransferDto(date);
             DateTime Now() => new DateTime(2018, 6, 5);
 
             // Act
-            var result = dto.CreateBookTransfer(Now);
+            var result = TransferDate.Of(date, Now);
 
             // Assert
             Assert.IsTrue(result.IsValid);
-            Assert.AreEqual(date, result.GetValidObject().DateOfTransfer.Value);
+            Assert.AreEqual(date, result.GetValidObject().Value);
         }
     }
 }
