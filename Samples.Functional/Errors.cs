@@ -14,8 +14,11 @@ namespace Samples.Functional
         public static InsufficientBalanceError InsufficientBalance
             => new InsufficientBalanceError();
 
+        public static InvaliBbeneficiaryError InvalidBeneficiary
+            => new InvaliBbeneficiaryError();
+
         public static InvalidBicError InvalidBic
-            => new InvalidBicError();
+           => new InvalidBicError();
 
         public static NegativeAmountError NegativeAmount
             => new NegativeAmountError();
@@ -46,6 +49,12 @@ namespace Samples.Functional
     {
         public override string Message { get; }
            = "Insufficient funds to fulfil the requested operation";
+    }
+
+    public sealed class InvaliBbeneficiaryError : Error
+    {
+        public override string Message { get; }
+            = "The beneficiary must have a name.";
     }
 
     public sealed class InvalidBicError : Error

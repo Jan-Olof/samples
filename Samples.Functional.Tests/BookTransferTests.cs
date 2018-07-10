@@ -39,6 +39,8 @@ namespace Samples.Functional.Tests
             // Assert
             Assert.IsTrue(result.IsValid);
             Assert.AreEqual(date, result.GetValidObject().DateOfTransfer.Value);
+            Assert.AreEqual(10000, result.GetValidObject().AmountToTransfer.Value);
+            Assert.AreEqual("bla", result.GetValidObject().BeneficiaryOfTransfer.Value);
         }
     }
 }
