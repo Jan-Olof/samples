@@ -8,7 +8,7 @@ namespace Samples.Functional.Tests
     public class AmountTests
     {
         [TestMethod]
-        public void TestShouldCreateBookTransfer_invalid()
+        public void TestShouldCreateAmount_invalid()
         {
             // Arrange
             const decimal amount = 0;
@@ -24,7 +24,7 @@ namespace Samples.Functional.Tests
         }
 
         [TestMethod]
-        public void TestShouldCreateBookTransfer_validated()
+        public void TestShouldCreateAmount_validated()
         {
             // Arrange
             const decimal amount = 0.1m;

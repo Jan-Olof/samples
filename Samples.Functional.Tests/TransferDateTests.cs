@@ -9,7 +9,7 @@ namespace Samples.Functional.Tests
     public class TransferDateTests
     {
         [TestMethod]
-        public void TestShouldCreateBookTransfer_invalid()
+        public void TestShouldCreateTransferDate_invalid()
         {
             // Arrange
             var date = new DateTime(2018, 6, 4);
@@ -26,7 +26,7 @@ namespace Samples.Functional.Tests
         }
 
         [TestMethod]
-        public void TestShouldCreateBookTransfer_validated()
+        public void TestShouldCreateTransferDate_validated()
         {
             // Arrange
             var date = new DateTime(2018, 6, 6);

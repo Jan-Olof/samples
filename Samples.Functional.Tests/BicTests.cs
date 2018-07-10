@@ -5,36 +5,36 @@ using System.Linq;
 namespace Samples.Functional.Tests
 {
     [TestClass]
-    public class BeneficiaryTests
+    public class BicTests
     {
         [TestMethod]
-        public void TestShouldCreateBeneficiary_invalid()
+        public void TestShouldCreateBic_invalid()
         {
             // Arrange
-            const string beneficiery = "";
+            const string bic = "bicbi1234";
 
             // Act
-            var result = Beneficiary.Of(beneficiery);
+            var result = Bic.Of(bic);
 
             // Assert
             Assert.IsFalse(result.IsValid);
             var e = result.GetErrors().ToList();
             Assert.AreEqual(1, e.Count);
-            Assert.AreEqual("The beneficiary must have a name.", e.Single().Message);
+            Assert.AreEqual("The beneficiary's BIC/SWIFT code is invalid", e.Single().Message);
         }
 
         [TestMethod]
-        public void TestShouldCreateBeneficiary_validated()
+        public void TestShouldCreateBic_validated()
         {
             // Arrange
-            const string beneficiery = "Yua Mikami";
+            const string bic = "asdfgh12345";
 
             // Act
-            var result = Beneficiary.Of(beneficiery);
+            var result = Bic.Of(bic);
 
             // Assert
             Assert.IsTrue(result.IsValid);
-            Assert.AreEqual(beneficiery, result.GetValidObject().Value);
+            Assert.AreEqual(bic, result.GetValidObject().Value);
         }
     }
 }

@@ -41,6 +41,7 @@ namespace Samples.Functional.Tests
             Assert.AreEqual(date, result.GetValidObject().DateOfTransfer.Value);
             Assert.AreEqual(10000, result.GetValidObject().AmountToTransfer.Value);
             Assert.AreEqual("bla", result.GetValidObject().BeneficiaryOfTransfer.Value);
+            Assert.AreEqual("bicbac1bec9", result.GetValidObject().BicCode.Value);
         }
     }
 }
