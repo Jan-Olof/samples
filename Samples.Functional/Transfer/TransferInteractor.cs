@@ -1,11 +1,10 @@
 ﻿using Dapper;
 using LaYumba.Functional;
-using Samples.Functional.Transfer;
+using Samples.Functional.Transfer.Entities;
 using System;
-using static LaYumba.Functional.F;
 using Unit = System.ValueTuple;
 
-namespace Samples.Functional
+namespace Samples.Functional.Transfer
 {
     public static class TransferInteractor
     {
@@ -23,7 +22,7 @@ namespace Samples.Functional
                 ConnectionHelper.Connect(connString, c => c.Execute("INSERT INTO... ", transfer)); //TODO: Fix!
             }
             catch (Exception ex) { return ex; }
-            return Unit();
+            return F.Unit();
         }
 
         //private static Validation<BookTransfer> Validate(this BookTransfer cmd, DateTime now)

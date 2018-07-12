@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Samples.Functional.Transfer;
+using Samples.Functional.Transfer.Entities;
 using System.Linq;
 
 namespace Samples.Functional.Tests

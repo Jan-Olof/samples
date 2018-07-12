@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Samples.Functional.Transfer;
+using System;
 
 namespace Samples.Functional.Tests.SampleObjects
 {

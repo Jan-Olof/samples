@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Samples.Functional
+namespace Samples.Functional.Transfer
 {
     public class BookTransferDto
     {

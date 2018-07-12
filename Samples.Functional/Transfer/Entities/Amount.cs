@@ -1,7 +1,6 @@
 ﻿using LaYumba.Functional;
-using static LaYumba.Functional.F;
 
-namespace Samples.Functional.Transfer
+namespace Samples.Functional.Transfer.Entities
 {
     public struct Amount
     {
@@ -12,8 +11,8 @@ namespace Samples.Functional.Transfer
 
         public static Validation<Amount> Of(decimal value)
              => IsValid(value)
-                ? Valid(new Amount(value))
-                : Invalid(Errors.NegativeAmount);
+                ? F.Valid(new Amount(value))
+                : F.Invalid(Errors.NegativeAmount);
 
         private static bool IsValid(decimal value)
             => value > 0;

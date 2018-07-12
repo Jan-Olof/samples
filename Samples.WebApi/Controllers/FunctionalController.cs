@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Samples.Functional;
+using Samples.Functional.Transfer;
 using System;
 
 namespace Samples.WebApi.Controllers

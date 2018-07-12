@@ -1,6 +1,7 @@
 using LaYumba.Functional;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Samples.Functional.Tests.SampleObjects;
+using Samples.Functional.Transfer;
 using System;
 using System.Collections.Generic;
 using System.Linq;

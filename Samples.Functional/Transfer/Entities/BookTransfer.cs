@@ -1,9 +1,8 @@
 ﻿using LaYumba.Functional;
 using System;
 using System.Collections.Generic;
-using static LaYumba.Functional.F;
 
-namespace Samples.Functional.Transfer
+namespace Samples.Functional.Transfer.Entities
 {
     public struct BookTransfer
     {
@@ -21,11 +20,10 @@ namespace Samples.Functional.Transfer
         public TransferDate DateOfTransfer { get; }
 
         public static Validation<BookTransfer> Of(
-            DateTime dateOfTransfer,
             Func<DateTime> now,
             decimal amountToTransfer,
             string beneficiaryOfTransfer,
-            string bicCode)
+            string bicCode, DateTime dateOfTransfer)
         {
             var date = TransferDate.Of(dateOfTransfer, now);
             var amount = Amount.Of(amountToTransfer);
@@ -33,8 +31,8 @@ namespace Samples.Functional.Transfer
             var bic = Bic.Of(bicCode);
 
             return IsValid(amount, date, beneficiary, bic)
-                ? Valid(new BookTransfer(amount.GetValidObject(), date.GetValidObject(), beneficiary.GetValidObject(), bic.GetValidObject()))
-                : Invalid(GetErrors(amount, date, beneficiary, bic));
+                ? F.Valid(new BookTransfer(amount.GetValidObject(), date.GetValidObject(), beneficiary.GetValidObject(), bic.GetValidObject()))
+                : F.Invalid(GetErrors(amount, date, beneficiary, bic));
         }
 
         private static IEnumerable<Error> GetErrors(

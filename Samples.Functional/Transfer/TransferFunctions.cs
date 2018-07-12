@@ -3,9 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using static LaYumba.Functional.F;
 
-namespace Samples.Functional
+namespace Samples.Functional.Transfer
 {
     /// <summary>
     /// Functions for BookTransfer.
@@ -33,7 +32,7 @@ namespace Samples.Functional
         /// Bic code validation.
         /// </summary>
         public static Validation<BookTransferDto> ValidateBic(this BookTransferDto transfer, Regex regex)
-            => Some(transfer)
+            => F.Some(transfer)
                 .Where(t => regex.IsMatch(t.Bic.ToUpper()))
                 .Match<Validation<BookTransferDto>>(() => Errors.InvalidBic, t => t);
 
@@ -41,7 +40,7 @@ namespace Samples.Functional
         /// Date validation.
         /// </summary>
         public static Validation<BookTransferDto> ValidateDate(this BookTransferDto transfer, DateTime now)
-            => Some(transfer)
+            => F.Some(transfer)
                 .Where(t => t.Date.Date > now.Date)
                 .Match<Validation<BookTransferDto>>(() => Errors.TransferDateIsPast, t => t);
     }

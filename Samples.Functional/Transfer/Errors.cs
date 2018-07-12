@@ -1,7 +1,7 @@
 ﻿using LaYumba.Functional;
 using System;
 
-namespace Samples.Functional
+namespace Samples.Functional.Transfer
 {
     public static class Errors
     {
