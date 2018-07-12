@@ -1,4 +1,5 @@
 ﻿using LaYumba.Functional;
+using static LaYumba.Functional.F;
 
 namespace Samples.Functional.Transfer.Entities
 {
@@ -11,8 +12,8 @@ namespace Samples.Functional.Transfer.Entities
 
         public static Validation<Beneficiary> Of(string value)
             => IsValid(value)
-                ? F.Valid(new Beneficiary(value))
-                : F.Invalid(Errors.InvalidBeneficiary);
+                ? Valid(new Beneficiary(value))
+                : Invalid(Errors.InvalidBeneficiary);
 
         private static bool IsValid(string value)
             => !string.IsNullOrWhiteSpace(value);

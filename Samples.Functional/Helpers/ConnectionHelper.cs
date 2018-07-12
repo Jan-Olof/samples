@@ -1,14 +1,14 @@
-﻿using System;
+﻿using LaYumba.Functional;
+using System;
 using System.Data;
 using System.Data.SqlClient;
-using static LaYumba.Functional.F;
 
-namespace Samples.Functional
+namespace Samples.Functional.Helpers
 {
     public static class ConnectionHelper
     {
         public static R Connect<R>(string connString, Func<IDbConnection, R> func)
-            => Using(new SqlConnection(connString)
+            => F.Using(new SqlConnection(connString)
                 , conn => { conn.Open(); return func(conn); });
 
         public static R Transact<R>

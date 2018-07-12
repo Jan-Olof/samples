@@ -39,10 +39,11 @@ namespace Samples.Functional.Tests
 
             // Assert
             Assert.IsTrue(result.IsValid);
-            Assert.AreEqual(date, result.GetValidObject().DateOfTransfer.Value);
-            Assert.AreEqual(10000, result.GetValidObject().AmountToTransfer.Value);
-            Assert.AreEqual("bla", result.GetValidObject().BeneficiaryOfTransfer.Value);
-            Assert.AreEqual("bicbac1bec9", result.GetValidObject().BicCode.Value);
+            Assert.AreEqual(date, result.GetObject().DateOfTransfer.Value);
+            Assert.AreEqual(10000, result.GetObject().AmountToTransfer.Value);
+            Assert.AreEqual("bla", result.GetObject().BeneficiaryOfTransfer.Value);
+            Assert.AreEqual("bicbac1bec9", result.GetObject().BicCode.Value);
+            Assert.AreEqual(Guid.Parse("853a2670-506b-4dcf-8cda-79f2f58d1f92"), result.GetObject().DebitedAccountId.Value);
         }
     }
 }

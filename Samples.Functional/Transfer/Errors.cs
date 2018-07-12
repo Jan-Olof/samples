@@ -1,5 +1,4 @@
 ﻿using LaYumba.Functional;
-using System;
 
 namespace Samples.Functional.Transfer
 {
@@ -29,7 +28,7 @@ namespace Samples.Functional.Transfer
         public static UnexpectedError UnexpectedError
             => new UnexpectedError();
 
-        public static Error UnknownAccountId(Guid id)
+        public static UnknownAccountId UnknownAccountId(string id)
             => new UnknownAccountId(id);
     }
 
@@ -83,7 +82,7 @@ namespace Samples.Functional.Transfer
 
     public sealed class UnknownAccountId : Error
     {
-        public UnknownAccountId(Guid id)
+        public UnknownAccountId(string id)
         {
             Id = id;
         }
@@ -91,6 +90,6 @@ namespace Samples.Functional.Transfer
         public override string Message
            => $"No account with id {Id} was found";
 
-        private Guid Id { get; }
+        private string Id { get; }
     }
 }

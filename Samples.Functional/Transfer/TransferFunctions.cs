@@ -23,7 +23,10 @@ namespace Samples.Functional.Transfer
             return validation.Match(e => e, d => new List<Error>()); // TODO: Test!
         }
 
-        public static T GetValidObject<T>(this Validation<T> validation)
+        /// <summary>
+        /// Get the valid object, or throw InvalidOperationException.
+        /// </summary>
+        public static T GetObject<T>(this Validation<T> validation)
         {
             return validation.Match(e => throw new InvalidOperationException("The object is invalid."), d => d); // TODO: Test!
         }

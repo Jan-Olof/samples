@@ -7,38 +7,36 @@ using System.Linq;
 namespace Samples.Functional.Tests
 {
     [TestClass]
-    public class TransferDateTests
+    public class AccountIdTests
     {
         [TestMethod]
-        public void TestShouldCreateTransferDate_invalid()
+        public void TestShouldCreateAccountId_invalid()
         {
             // Arrange
-            var date = new DateTime(2018, 6, 4);
-            DateTime Now() => new DateTime(2018, 6, 5);
+            const string accountId = "asdfgh12345";
 
             // Act
-            var result = TransferDate.Of(date, Now);
+            var result = AccountId.Of(accountId);
 
             // Assert
             Assert.IsFalse(result.IsValid);
             var e = result.GetErrors().ToList();
             Assert.AreEqual(1, e.Count);
-            Assert.AreEqual("Transfer date cannot be in the past", e.Single().Message);
+            Assert.AreEqual($"No account with id {accountId} was found", e.Single().Message);
         }
 
         [TestMethod]
-        public void TestShouldCreateTransferDate_validated()
+        public void TestShouldCreateAccountId_validated()
         {
             // Arrange
-            var date = new DateTime(2018, 6, 6);
-            DateTime Now() => new DateTime(2018, 6, 5);
+            const string accountId = "fb325803-b135-48b0-8b24-063666203929";
 
             // Act
-            var result = TransferDate.Of(date, Now);
+            var result = AccountId.Of(accountId);
 
             // Assert
             Assert.IsTrue(result.IsValid);
-            Assert.AreEqual(date, result.GetObject().Value);
+            Assert.AreEqual(Guid.Parse(accountId), result.GetObject().Value);
         }
     }
 }

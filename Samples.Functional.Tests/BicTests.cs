@@ -35,7 +35,7 @@ namespace Samples.Functional.Tests
 
             // Assert
             Assert.IsTrue(result.IsValid);
-            Assert.AreEqual(bic, result.GetValidObject().Value);
+            Assert.AreEqual(bic, result.GetObject().Value);
         }
     }
 }

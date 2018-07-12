@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using LaYumba.Functional;
+using Samples.Functional.Helpers;
 using Samples.Functional.Transfer.Entities;
 using System;
 using Unit = System.ValueTuple;

@@ -1,6 +1,8 @@
 ﻿using LaYumba.Functional;
 using System;
 
+using static LaYumba.Functional.F;
+
 namespace Samples.Functional.Transfer.Entities
 {
     public struct TransferDate
@@ -12,8 +14,8 @@ namespace Samples.Functional.Transfer.Entities
 
         public static Validation<TransferDate> Of(DateTime transferDate, Func<DateTime> now)
                     => IsValid(transferDate, now)
-                ? F.Valid(new TransferDate(transferDate))
-                : F.Invalid(Errors.TransferDateIsPast);
+                ? Valid(new TransferDate(transferDate))
+                : Invalid(Errors.TransferDateIsPast);
 
         private static bool IsValid(DateTime transferDate, Func<DateTime> now)
             => transferDate.Date > now().Date;
