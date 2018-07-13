@@ -44,6 +44,7 @@ namespace Samples.Functional.Tests
             Assert.AreEqual("bla", result.GetObject().BeneficiaryOfTransfer.Value);
             Assert.AreEqual("bicbac1bec9", result.GetObject().BicCode.Value);
             Assert.AreEqual(Guid.Parse("853a2670-506b-4dcf-8cda-79f2f58d1f92"), result.GetObject().DebitedAccountId.Value);
+            Assert.AreEqual("CH56 0483 5012 3456 7800 9", result.GetObject().InternationalBankAccountNumber.Value);
         }
     }
 }

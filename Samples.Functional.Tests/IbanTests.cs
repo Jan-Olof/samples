@@ -6,36 +6,36 @@ using System.Linq;
 namespace Samples.Functional.Tests
 {
     [TestClass]
-    public class BeneficiaryTests
+    public class IbanTests
     {
         [TestMethod]
-        public void TestShouldCreateBeneficiary_invalid()
+        public void TestShouldCreateIban_invalid()
         {
             // Arrange
-            const string beneficiery = "";
+            const string iban = "";
 
             // Act
-            var result = Beneficiary.Of(beneficiery);
+            var result = Iban.Of(iban);
 
             // Assert
             Assert.IsFalse(result.IsValid);
             var e = result.GetErrors().ToList();
             Assert.AreEqual(1, e.Count);
-            Assert.AreEqual("The beneficiary must have a name.", e.Single().Message);
+            Assert.AreEqual("Iban is invalid.", e.Single().Message);
         }
 
         [TestMethod]
-        public void TestShouldCreateBeneficiary_validated()
+        public void TestShouldCreateIban_validated()
         {
             // Arrange
-            const string beneficiery = "Laurie Anderson";
+            const string iban = "123456789";
 
             // Act
-            var result = Beneficiary.Of(beneficiery);
+            var result = Iban.Of(iban);
 
             // Assert
             Assert.IsTrue(result.IsValid);
-            Assert.AreEqual(beneficiery, result.GetObject().Value);
+            Assert.AreEqual(iban, result.GetObject().Value);
         }
     }
 }

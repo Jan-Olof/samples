@@ -19,6 +19,9 @@ namespace Samples.Functional.Transfer
         public static InvalidBicError InvalidBic
            => new InvalidBicError();
 
+        public static InvalidIbanError InvalidIban
+            => new InvalidIbanError();
+
         public static NegativeAmountError NegativeAmount
             => new NegativeAmountError();
 
@@ -60,6 +63,12 @@ namespace Samples.Functional.Transfer
     {
         public override string Message { get; }
            = "The beneficiary's BIC/SWIFT code is invalid";
+    }
+
+    public sealed class InvalidIbanError : Error
+    {
+        public override string Message { get; }
+            = "Iban is invalid.";
     }
 
     public sealed class NegativeAmountError : Error
