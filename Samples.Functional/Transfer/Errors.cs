@@ -22,6 +22,12 @@ namespace Samples.Functional.Transfer
         public static InvalidIbanError InvalidIban
             => new InvalidIbanError();
 
+        public static InvalidReferenceError InvalidReference
+            => new InvalidReferenceError();
+
+        public static InvalidTimestampError InvalidTimestamp
+            => new InvalidTimestampError();
+
         public static NegativeAmountError NegativeAmount
             => new NegativeAmountError();
 
@@ -69,6 +75,18 @@ namespace Samples.Functional.Transfer
     {
         public override string Message { get; }
             = "Iban is invalid.";
+    }
+
+    public sealed class InvalidReferenceError : Error
+    {
+        public override string Message { get; }
+            = "Reference is invalid.";
+    }
+
+    public sealed class InvalidTimestampError : Error
+    {
+        public override string Message { get; }
+            = "Timestamp is invalid. (Has not occured yet.)";
     }
 
     public sealed class NegativeAmountError : Error
