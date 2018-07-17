@@ -72,7 +72,8 @@ namespace Samples.WebApi
         /// </summary>
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            services.AddMvc();//.AddControllersAsServices();
+
             services.AddAutoMapper(mce => mce.AddProfile(new PersonMapping(DateTime.Now)));
 
             ConfigureCors(services);
@@ -99,21 +100,21 @@ namespace Samples.WebApi
         /// Register swagger.
         /// </summary>
         private static void RegisterSwagger(IServiceCollection services)
-            => services.AddSwaggerGen(c =>
+        => services.AddSwaggerGen(c =>
+        {
+            c.SwaggerDoc("v1", new Info
             {
-                c.SwaggerDoc("v1", new Info
-                {
-                    Version = "v1",
-                    Title = "Samples.WebApi",
-                    Description = "A sample web api.",
-                    TermsOfService = "None"
-                });
-
-                //Set the comments path for the swagger json and ui.
-                string basePath = AppContext.BaseDirectory;
-                string xmlPath = Path.Combine(basePath, "Samples.WebApi.xml");
-                c.IncludeXmlComments(xmlPath);
+                Version = "v1",
+                Title = "Samples.WebApi",
+                Description = "A sample web api.",
+                TermsOfService = "None"
             });
+
+            //Set the comments path for the swagger json and ui.
+            string basePath = AppContext.BaseDirectory;
+            string xmlPath = Path.Combine(basePath, "Samples.WebApi.xml");
+            c.IncludeXmlComments(xmlPath);
+        });
 
         /// <summary>
         /// Configure authentication.
