@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Samples.Functional", "Sampl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Samples.Functional.Tests", "Samples.Functional.Tests\Samples.Functional.Tests.csproj", "{F0EC2BC8-B2ED-4CC9-A81F-951554F0E4DA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FunctionalWebApi", "FunctionalWebApi\FunctionalWebApi.csproj", "{C39B2A9E-8E91-4C71-A44B-2F238528A3A0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Samples.FunctionalWebApi", "Samples.FunctionalWebApi\Samples.FunctionalWebApi.csproj", "{96F9277C-41C2-43EA-834C-7DFAE137BE37}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,10 +47,10 @@ Global
 		{F0EC2BC8-B2ED-4CC9-A81F-951554F0E4DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F0EC2BC8-B2ED-4CC9-A81F-951554F0E4DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F0EC2BC8-B2ED-4CC9-A81F-951554F0E4DA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C39B2A9E-8E91-4C71-A44B-2F238528A3A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C39B2A9E-8E91-4C71-A44B-2F238528A3A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C39B2A9E-8E91-4C71-A44B-2F238528A3A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C39B2A9E-8E91-4C71-A44B-2F238528A3A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96F9277C-41C2-43EA-834C-7DFAE137BE37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96F9277C-41C2-43EA-834C-7DFAE137BE37}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96F9277C-41C2-43EA-834C-7DFAE137BE37}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96F9277C-41C2-43EA-834C-7DFAE137BE37}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

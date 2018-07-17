@@ -1,10 +1,10 @@
-﻿using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
-
-// ReSharper disable ClassNeverInstantiated.Global
+﻿// ReSharper disable ClassNeverInstantiated.Global
 // ReSharper disable MemberCanBePrivate.Global
 
-namespace FunctionalWebApi
+using Microsoft.AspNetCore;
+using Microsoft.AspNetCore.Hosting;
+
+namespace Samples.FunctionalWebApi
 {
     public class Program
     {

@@ -2,8 +2,9 @@
 using Microsoft.Extensions.Logging;
 using Samples.Functional.Transfer;
 using System;
+using System.Net;
 
-namespace FunctionalWebApi.Controllers
+namespace Samples.FunctionalWebApi.Controllers
 {
     /// <summary>
     /// This is a controller for trying out functional programming.
@@ -31,6 +32,9 @@ namespace FunctionalWebApi.Controllers
         /// <summary>
         /// Make a transfer.
         /// </summary>
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
         [HttpPost]
         public IActionResult MakeFutureTransfer([FromBody] BookTransferDto transfer)
         {

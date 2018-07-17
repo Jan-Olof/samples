@@ -1,16 +1,18 @@
-﻿using FunctionalWebApi.Controllers;
+﻿// ReSharper disable ClassNeverInstantiated.Global
+// ReSharper disable MemberCanBePrivate.Global
+
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Samples.FunctionalWebApi.Controllers;
+using Swashbuckle.AspNetCore.Swagger;
 using System;
+using System.IO;
 
-// ReSharper disable ClassNeverInstantiated.Global
-// ReSharper disable MemberCanBePrivate.Global
-
-namespace FunctionalWebApi
+namespace Samples.FunctionalWebApi
 {
     public class Startup
     {
@@ -37,6 +39,12 @@ namespace FunctionalWebApi
 
             app.UseHttpsRedirection();
             app.UseMvc();
+
+            // Enable middleware to serve generated Swagger as a JSON endpoint.
+            app.UseSwagger();
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS etc.), specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "Samples.WebApi"); });
         }
 
         /// <summary>
@@ -49,6 +57,7 @@ namespace FunctionalWebApi
                 .AddControllersAsServices();
 
             ConfigureFunctionalDependencyInjection(services);
+            RegisterSwagger(services);
         }
 
         /// <summary>
@@ -58,5 +67,25 @@ namespace FunctionalWebApi
         {
             services.AddTransient(provider => new FunctionalController(provider.GetRequiredService<ILogger<FunctionalController>>(), () => DateTime.Now));
         }
+
+        /// <summary>
+        /// Register swagger.
+        /// </summary>
+        private static void RegisterSwagger(IServiceCollection services)
+            => services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info
+                {
+                    Version = "v1",
+                    Title = "Samples.FunctionalWebApi",
+                    Description = "A sample web api using functional programming.",
+                    TermsOfService = "None"
+                });
+
+                //Set the comments path for the swagger json and ui.
+                string basePath = AppContext.BaseDirectory;
+                string xmlPath = Path.Combine(basePath, "Samples.FunctionalWebApi.xml");
+                c.IncludeXmlComments(xmlPath);
+            });
     }
 }

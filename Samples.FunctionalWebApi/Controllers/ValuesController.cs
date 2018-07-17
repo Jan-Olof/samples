@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-namespace FunctionalWebApi.Controllers
+namespace Samples.FunctionalWebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
