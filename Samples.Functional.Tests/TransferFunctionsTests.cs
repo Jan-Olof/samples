@@ -12,20 +12,6 @@ namespace Samples.Functional.Tests
     public class TransferFunctionsTests
     {
         [TestMethod]
-        public void TestShouldAddMany()
-        {
-            // Given
-            var x = new List<string> { "a", "b" };
-            var y = new List<string> { "c", "d", "e" };
-
-            // When
-            var result = x.AddMany(y);
-
-            // Then
-            Assert.AreEqual(5, result.Count());
-        }
-
-        [TestMethod]
         public void TestShouldValidateBic_failure()
         {
             // Given

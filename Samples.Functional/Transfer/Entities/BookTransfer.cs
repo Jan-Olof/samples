@@ -1,4 +1,5 @@
 ﻿using LaYumba.Functional;
+using Samples.Functional.Helpers;
 using System;
 using System.Collections.Generic;
 using static LaYumba.Functional.F;
