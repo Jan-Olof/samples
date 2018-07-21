@@ -17,5 +17,8 @@ namespace Samples.Functional.Tests.SampleObjects
                 Reference = "ref",
                 Timestamp = new DateTime(2018, 6, 1, 7, 8, 9)
             };
+
+        public static BookTransferDto CreateBookTransferDto()
+            => new BookTransferDto();
     }
 }

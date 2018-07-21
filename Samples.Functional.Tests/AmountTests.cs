@@ -21,7 +21,7 @@ namespace Samples.Functional.Tests
             Assert.IsFalse(result.IsValid);
             var e = result.GetErrors().ToList();
             Assert.AreEqual(1, e.Count);
-            Assert.AreEqual("The amount is a negative value.", e.Single().Message);
+            Assert.AreEqual("The amount is not a positive value.", e.Single().Message);
         }
 
         [TestMethod]

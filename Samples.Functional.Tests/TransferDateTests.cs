@@ -23,7 +23,7 @@ namespace Samples.Functional.Tests
             Assert.IsFalse(result.IsValid);
             var e = result.GetErrors().ToList();
             Assert.AreEqual(1, e.Count);
-            Assert.AreEqual("Transfer date cannot be in the past", e.Single().Message);
+            Assert.AreEqual("Transfer date cannot be in the past.", e.Single().Message);
         }
 
         [TestMethod]

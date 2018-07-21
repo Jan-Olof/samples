@@ -16,6 +16,6 @@ namespace Samples.Functional.Transfer.Entities
                 : Invalid(Errors.InvalidBic);
 
         private static bool IsValid(string value)
-            => Settings.BicCodeRegex().IsMatch(value.ToUpper());
+            => Settings.BicCodeRegex().IsMatch(value?.ToUpper() ?? "");
     }
 }

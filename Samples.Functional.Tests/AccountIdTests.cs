@@ -22,7 +22,7 @@ namespace Samples.Functional.Tests
             Assert.IsFalse(result.IsValid);
             var e = result.GetErrors().ToList();
             Assert.AreEqual(1, e.Count);
-            Assert.AreEqual($"No account with id {accountId} was found", e.Single().Message);
+            Assert.AreEqual($"No account with id {accountId} was found.", e.Single().Message);
         }
 
         [TestMethod]

@@ -21,7 +21,7 @@ namespace Samples.Functional.Tests
             Assert.IsFalse(result.IsValid);
             var e = result.GetErrors().ToList();
             Assert.AreEqual(1, e.Count);
-            Assert.AreEqual("The beneficiary's BIC/SWIFT code is invalid", e.Single().Message);
+            Assert.AreEqual("The beneficiary's BIC/SWIFT code is invalid.", e.Single().Message);
         }
 
         [TestMethod]
