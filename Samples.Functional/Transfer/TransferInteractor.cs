@@ -6,12 +6,11 @@ namespace Samples.Functional.Transfer
 {
     public static class TransferInteractor
     {
-        public static Validation<Exceptional<Unit>> Handle(this BookTransferDto cmd, Func<DateTime> now, string connString)
-        {
-            return cmd.CreateBookTransfer(now)
-                .Map(transfer => transfer
+        public static Validation<Exceptional<Unit>> Handle(this BookTransferDto transfer, Func<DateTime> now, string connString)
+            => transfer
+                .CreateBookTransfer(now)
+                .Map(t => t
                     .CreateBookTransferDao()
                     .Save(connString));
-        }
     }
 }
