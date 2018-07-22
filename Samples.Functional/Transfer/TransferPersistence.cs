@@ -15,7 +15,7 @@ namespace Samples.Functional.Transfer
         /// <summary>
         /// Persist a transfer to the database.
         /// </summary>
-        public static Exceptional<Unit> Save(this BookTransferDao transfer, string connString)
+        public static Exceptional<Unit> Save(this BookTransferDao transfer, ConnectionString connString)
         {
             try
             {

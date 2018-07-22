@@ -7,7 +7,7 @@ namespace Samples.Functional.Helpers
 {
     public static class ConnectionHelper
     {
-        public static R Connect<R>(string connString, Func<IDbConnection, R> func)
+        public static R Connect<R>(ConnectionString connString, Func<IDbConnection, R> func)
             => F.Using(new SqlConnection(connString)
                 , conn => { conn.Open(); return func(conn); });
 

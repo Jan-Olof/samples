@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Samples.Functional.Helpers;
 using Samples.Functional.Transfer;
 using System;
 using System.Net;
@@ -13,20 +14,19 @@ namespace Samples.FunctionalWebApi.Controllers
     [Route("api/Functional")]
     public class FunctionalController : Controller
     {
-        private readonly string _connString; // persistence
+        private readonly ConnectionString _connString;
 
         private readonly ILogger<FunctionalController> _logger;
 
-        private readonly Func<DateTime> _now; // date validation
+        private readonly Func<DateTime> _now;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FunctionalController" /> class.
         /// </summary>
-        public FunctionalController(ILogger<FunctionalController> logger, Func<DateTime> now)
+        public FunctionalController(ILogger<FunctionalController> logger, ConnectionString connectionString, Func<DateTime> now)
         {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            //_connString = "Data Source=(LocalDb)\\MSSQLLocalDB;Initial Catalog=FunctionalSamples;";
-            _connString = "Data Source=localhost\\sql2017;Initial Catalog=FunctionalSamples;Integrated Security=True;"; // TODO: Move
+            _connString = connectionString;
             _now = now;
         }
 
