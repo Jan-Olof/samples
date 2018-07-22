@@ -25,7 +25,8 @@ namespace Samples.FunctionalWebApi.Controllers
         public FunctionalController(ILogger<FunctionalController> logger, Func<DateTime> now)
         {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            _connString = "Data Source=(LocalDb)\\MSSQLLocalDB;Initial Catalog=FunctionalSamples;";
+            //_connString = "Data Source=(LocalDb)\\MSSQLLocalDB;Initial Catalog=FunctionalSamples;";
+            _connString = "Data Source=localhost\\sql2017;Initial Catalog=FunctionalSamples;Integrated Security=True;"; // TODO: Move
             _now = now;
         }
 
@@ -38,50 +39,17 @@ namespace Samples.FunctionalWebApi.Controllers
         [HttpPost]
         public IActionResult MakeFutureTransfer([FromBody] BookTransferDto transfer)
         {
-            // TODO: Fix
-
             return transfer.Handle(_now, _connString).Match(
                 Invalid: BadRequest,
                 Valid: result => result.Match(
                     Exception: OnFaulted,
                     Success: _ => Ok()));
-
-            //return Ok();
         }
-
-        /// <summary>
-        /// test.
-        /// </summary>
-        [ProducesResponseType((int)HttpStatusCode.OK)]
-        [HttpPost("test")]
-        public IActionResult TestThis([FromBody] BookTransferDto transfer)
-        {
-            return Ok();
-        }
-
-        //private Validation<Exceptional<Unit>> Handle(BookTransfer request)
-        //    => Validate(request)
-        //        .Map(Save);
 
         private IActionResult OnFaulted(Exception ex)
         {
             _logger.LogError(ex.Message);
             return StatusCode(500, Errors.UnexpectedError);
         }
-
-        //// persistence
-        //private Exceptional<Unit> Save(BookTransfer transfer)
-        //{
-        //    try
-        //    {
-        //        ConnectionHelper.Connect(_connString, c => c.Execute("INSERT ...", transfer));
-        //    }
-        //    catch (Exception ex) { return ex; }
-        //    return Unit();
-        //}
-
-        //private Validation<BookTransfer> Validate(BookTransfer cmd)
-        //    => cmd.ValidateBic(Settings.BicCodeRegex())
-        //        .Bind(c => c.ValidateDate(_now));
     }
 }

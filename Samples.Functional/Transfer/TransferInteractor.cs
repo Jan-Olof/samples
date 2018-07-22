@@ -1,8 +1,5 @@
-﻿using Dapper;
-using LaYumba.Functional;
-using Samples.Functional.Helpers;
+﻿using LaYumba.Functional;
 using System;
-using static LaYumba.Functional.F;
 using Unit = System.ValueTuple;
 
 namespace Samples.Functional.Transfer
@@ -16,20 +13,5 @@ namespace Samples.Functional.Transfer
                     .CreateBookTransferDao()
                     .Save(connString));
         }
-
-        // persistence TODO: Move to TransferPersistance
-        private static Exceptional<Unit> Save(this BookTransferDao transfer, string connString)
-        {
-            try
-            {
-                ConnectionHelper.Connect(connString, c => c.Execute("INSERT INTO... ", transfer)); //TODO: Fix!
-            }
-            catch (Exception ex) { return ex; }
-            return Unit();
-        }
-
-        //private static Validation<BookTransfer> Validate(this BookTransfer cmd, DateTime now)
-        //    => cmd.ValidateBic(Settings.BicCodeRegex())
-        //        .Bind(c => c.ValidateDate(now));
     }
 }

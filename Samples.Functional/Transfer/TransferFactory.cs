@@ -17,6 +17,7 @@ namespace Samples.Functional.Transfer
                 bookTransfer.DateOfTransfer.Value,
                 bookTransfer.DebitedAccountId.Value,
                 bookTransfer.InternationalBankAccountNumber.Value,
+                0,
                 bookTransfer.ReferenceOfTransfer.Value,
                 bookTransfer.TimestampOfTransfer.Value);
 
