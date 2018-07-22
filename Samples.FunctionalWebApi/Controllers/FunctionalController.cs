@@ -49,6 +49,16 @@ namespace Samples.FunctionalWebApi.Controllers
             //return Ok();
         }
 
+        /// <summary>
+        /// test.
+        /// </summary>
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [HttpPost("test")]
+        public IActionResult TestThis([FromBody] BookTransferDto transfer)
+        {
+            return Ok();
+        }
+
         //private Validation<Exceptional<Unit>> Handle(BookTransfer request)
         //    => Validate(request)
         //        .Map(Save);

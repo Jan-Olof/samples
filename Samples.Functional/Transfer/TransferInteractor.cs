@@ -13,12 +13,12 @@ namespace Samples.Functional.Transfer
         {
             return cmd.CreateBookTransfer(now)
                 .Map(transfer => transfer
-                    .CreateBookTransferDto()
+                    .CreateBookTransferDao()
                     .Save(connString));
         }
 
         // persistence TODO: Move to TransferPersistance
-        private static Exceptional<Unit> Save(this BookTransferDto transfer, string connString)
+        private static Exceptional<Unit> Save(this BookTransferDao transfer, string connString)
         {
             try
             {

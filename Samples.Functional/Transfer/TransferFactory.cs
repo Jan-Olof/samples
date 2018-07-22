@@ -15,22 +15,20 @@ namespace Samples.Functional.Transfer
                 bookTransfer.BeneficiaryOfTransfer.Value,
                 bookTransfer.BicCode.Value,
                 bookTransfer.DateOfTransfer.Value,
-                bookTransfer.DebitedAccountId.Value.ToString(),
+                bookTransfer.DebitedAccountId.Value,
                 bookTransfer.InternationalBankAccountNumber.Value,
                 bookTransfer.ReferenceOfTransfer.Value,
                 bookTransfer.TimestampOfTransfer.Value);
 
         public static BookTransferDto CreateBookTransferDto(this BookTransfer bookTransfer)
-            => new BookTransferDto
-            {
-                Amount = bookTransfer.AmountToTransfer.Value,
-                Beneficiary = bookTransfer.BeneficiaryOfTransfer.Value,
-                Bic = bookTransfer.BicCode.Value,
-                Date = bookTransfer.DateOfTransfer.Value,
-                DebitedAccountId = bookTransfer.DebitedAccountId.Value.ToString(),
-                Iban = bookTransfer.InternationalBankAccountNumber.Value,
-                Reference = bookTransfer.ReferenceOfTransfer.Value,
-                Timestamp = bookTransfer.TimestampOfTransfer.Value
-            };
+            => new BookTransferDto(
+                bookTransfer.AmountToTransfer.Value,
+                bookTransfer.BeneficiaryOfTransfer.Value,
+                bookTransfer.BicCode.Value,
+                bookTransfer.DateOfTransfer.Value,
+                bookTransfer.DebitedAccountId.Value.ToString(),
+                bookTransfer.InternationalBankAccountNumber.Value,
+                bookTransfer.ReferenceOfTransfer.Value,
+                bookTransfer.TimestampOfTransfer.Value);
     }
 }
