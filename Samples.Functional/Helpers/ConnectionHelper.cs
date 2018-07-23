@@ -1,4 +1,6 @@
-﻿using LaYumba.Functional;
+﻿// ReSharper disable InconsistentNaming
+
+using LaYumba.Functional;
 using System;
 using System.Data;
 using System.Data.SqlClient;
@@ -14,7 +16,7 @@ namespace Samples.Functional.Helpers
         public static R Transact<R>
             (SqlConnection conn, Func<SqlTransaction, R> f)
         {
-            R r = default(R);
+            R r;
             using (var tran = conn.BeginTransaction())
             {
                 r = f(tran);

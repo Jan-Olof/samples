@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Samples.Functional.Helpers
 {
-    public static class EnumerableHelper
+    public static class EnumerableExt
     {
         /// <summary>
         /// An AddRange function.

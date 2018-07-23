@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Samples.Functional.Helpers;
+using Samples.Functional.Transfer;
 using Samples.FunctionalWebApi.Controllers;
 using Swashbuckle.AspNetCore.Swagger;
 using System;
@@ -75,7 +76,10 @@ namespace Samples.FunctionalWebApi
         {
             ConnectionString connString = configuration.GetSection("ConnectionString").Value;
 
-            services.AddTransient(provider => new FunctionalController(provider.GetRequiredService<ILogger<FunctionalController>>(), connString, () => DateTime.Now));
+            services.AddTransient(provider => new TransferController(
+                provider.GetRequiredService<ILogger<TransferController>>(),
+                connString.Execute<BookTransferDao>(),
+                () => DateTime.Now));
         }
 
         /// <summary>

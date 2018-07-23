@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using LaYumba.Functional;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Samples.Functional.Helpers;
 using Samples.Functional.Transfer;
 using System;
 using System.Net;
+using static Samples.Functional.Transfer.TransferPersistence;
 
 namespace Samples.FunctionalWebApi.Controllers
 {
@@ -12,21 +14,21 @@ namespace Samples.FunctionalWebApi.Controllers
     /// </summary>
     [Produces("application/json")]
     [Route("api/Functional")]
-    public class FunctionalController : Controller
+    public class TransferController : Controller
     {
-        private readonly ConnectionString _connString;
+        private readonly Func<SqlTemplate, object, int> _commands;
 
-        private readonly ILogger<FunctionalController> _logger;
+        private readonly ILogger<TransferController> _logger;
 
         private readonly Func<DateTime> _now;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="FunctionalController" /> class.
+        /// Initializes a new instance of the <see cref="TransferController" /> class.
         /// </summary>
-        public FunctionalController(ILogger<FunctionalController> logger, ConnectionString connectionString, Func<DateTime> now)
+        public TransferController(ILogger<TransferController> logger, Func<SqlTemplate, object, int> commands, Func<DateTime> now)
         {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            _connString = connectionString;
+            _commands = commands;
             _now = now;
         }
 
@@ -39,11 +41,15 @@ namespace Samples.FunctionalWebApi.Controllers
         [HttpPost]
         public IActionResult MakeFutureTransfer([FromBody] BookTransferDto transfer)
         {
-            return transfer.Handle(_now, _connString).Match(
-                Invalid: BadRequest,
-                Valid: result => result.Match(
-                    Exception: OnFaulted,
-                    Success: _ => Ok()));
+            var insert = _commands.Apply(InsertIntoBookTransfers);
+
+            return transfer
+                .Create(_now, insert)
+                .Match(
+                    Invalid: BadRequest,
+                    Valid: result => result.Match(
+                        Exception: OnFaulted,
+                        Success: _ => Ok()));
         }
 
         private IActionResult OnFaulted(Exception ex)

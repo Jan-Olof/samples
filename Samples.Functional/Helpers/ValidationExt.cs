@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Samples.Functional.Helpers
 {
-    public static class ValidationHelper // TODO: Test!
+    public static class ValidationExt // TODO: Test!
     {
         /// <summary>
         /// Get all errors.
@@ -13,7 +13,7 @@ namespace Samples.Functional.Helpers
             => validation.Match(e => e, d => new List<Error>());
 
         /// <summary>
-        /// Get the valid object, or throw InvalidOperationException. (So, this can only be used when we know the object is valid.)
+        /// Get the valid object, or throw InvalidOperationException. (So, this can only be used when we know that the object is valid.)
         /// </summary>
         public static T GetObject<T>(this Validation<T> validation)
             => validation.Match(e => throw new InvalidOperationException("The object is invalid."), d => d);

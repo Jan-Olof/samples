@@ -1,5 +1,4 @@
-﻿using Dapper;
-using LaYumba.Functional;
+﻿using LaYumba.Functional;
 using Samples.Functional.Helpers;
 using System;
 using static LaYumba.Functional.F;
@@ -10,16 +9,16 @@ namespace Samples.Functional.Transfer
     public static class TransferPersistence
     {
         // TODO: Move
-        private const string InsertIntoBookTransfers = "INSERT INTO [dbo].[BookTransfers]([Amount],[Beneficiary],[Bic],[Date],[DebitedAccountId],[Iban],[Reference],[Timestamp]) VALUES(@Amount,@Beneficiary,@Bic,@Date,@DebitedAccountId,@Iban,@Reference,@Timestamp)";
+        public static readonly SqlTemplate InsertIntoBookTransfers = "INSERT INTO [dbo].[BookTransfers]([Amount],[Beneficiary],[Bic],[Date],[DebitedAccountId],[Iban],[Reference],[Timestamp]) VALUES(@Amount,@Beneficiary,@Bic,@Date,@DebitedAccountId,@Iban,@Reference,@Timestamp)";
 
         /// <summary>
         /// Persist a transfer to the database.
         /// </summary>
-        public static Exceptional<Unit> Save(this BookTransferDao transfer, ConnectionString connString)
+        public static Exceptional<Unit> Save(this BookTransferDao transfer, Func<object, int> insert)
         {
             try
             {
-                ConnectionHelper.Connect(connString, c => c.Execute(InsertIntoBookTransfers, transfer));
+                insert(transfer);
             }
             catch (Exception ex)
             {
