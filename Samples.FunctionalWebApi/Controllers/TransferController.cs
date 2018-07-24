@@ -1,11 +1,9 @@
-﻿using LaYumba.Functional;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Samples.Functional.Helpers;
 using Samples.Functional.Transfer;
 using System;
 using System.Net;
-using static Samples.Functional.Transfer.TransferPersistence;
 
 namespace Samples.FunctionalWebApi.Controllers
 {
@@ -13,10 +11,10 @@ namespace Samples.FunctionalWebApi.Controllers
     /// This is a controller for trying out functional programming.
     /// </summary>
     [Produces("application/json")]
-    [Route("api/Functional")]
+    [Route("api/transfer")]
     public class TransferController : Controller
     {
-        private readonly Func<SqlTemplate, object, int> _commands;
+        private readonly Func<SqlTemplate, BookTransferDao, int> _commands;
 
         private readonly ILogger<TransferController> _logger;
 
@@ -25,7 +23,7 @@ namespace Samples.FunctionalWebApi.Controllers
         /// <summary>
         /// Initializes a new instance of the <see cref="TransferController" /> class.
         /// </summary>
-        public TransferController(ILogger<TransferController> logger, Func<SqlTemplate, object, int> commands, Func<DateTime> now)
+        public TransferController(ILogger<TransferController> logger, Func<SqlTemplate, BookTransferDao, int> commands, Func<DateTime> now)
         {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _commands = commands;
@@ -40,17 +38,13 @@ namespace Samples.FunctionalWebApi.Controllers
         [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
         [HttpPost]
         public IActionResult MakeFutureTransfer([FromBody] BookTransferDto transfer)
-        {
-            var insert = _commands.Apply(InsertIntoBookTransfers);
-
-            return transfer
-                .Create(_now, insert)
+            => transfer
+                .Create(_now, _commands)
                 .Match(
                     Invalid: BadRequest,
                     Valid: result => result.Match(
                         Exception: OnFaulted,
                         Success: _ => Ok()));
-        }
 
         private IActionResult OnFaulted(Exception ex)
         {
