@@ -4,6 +4,11 @@ namespace Samples.Functional.Transfer
 {
     public class BookTransferDao
     {
+        [Obsolete("Default constructor only here for the ORM", true)]
+        public BookTransferDao()
+        {
+        }
+
         public BookTransferDao(decimal amount, string beneficiary, string bic, DateTime date, Guid debitedAccountId, string iban, int id, string reference, DateTime timestamp)
         {
             Amount = amount;

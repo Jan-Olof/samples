@@ -79,6 +79,7 @@ namespace Samples.FunctionalWebApi
             services.AddTransient(provider => new TransferController(
                 provider.GetRequiredService<ILogger<TransferController>>(),
                 connString.Execute<BookTransferDao>(),
+                connString.Query<BookTransferDao>(),
                 () => DateTime.Now));
         }
 

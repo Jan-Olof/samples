@@ -1,6 +1,7 @@
 ﻿using LaYumba.Functional;
 using Samples.Functional.Helpers;
 using System;
+using System.Collections.Generic;
 using static Samples.Functional.SqlTemplates;
 using Unit = System.ValueTuple;
 
@@ -17,6 +18,13 @@ namespace Samples.Functional.Transfer
                 .Map(t => t
                     .CreateBookTransferDao()
                     .Save(insert));
+        }
+
+        public static Exceptional<IEnumerable<BookTransferDao>> GetFromId(this int id, Func<SqlTemplate, object, IEnumerable<BookTransferDao>> queries)
+        {
+            var query = queries.Apply(q); // TODO: Continue with this
+
+            return new { Id = id }.Query(query);
         }
     }
 }

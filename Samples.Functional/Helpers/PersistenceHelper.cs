@@ -6,6 +6,22 @@ namespace Samples.Functional.Helpers
 {
     public static class PersistenceHelper
     {
+        public static Exceptional<TR> Query<T, TR>(this T o, Func<T, TR> query)
+        {
+            TR result;
+
+            try
+            {
+                result = query(o);
+            }
+            catch (Exception ex)
+            {
+                return ex;
+            }
+
+            return result;
+        }
+
         /// <summary>
         /// Persist an object to the data store.
         /// </summary>
