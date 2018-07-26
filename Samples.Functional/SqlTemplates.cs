@@ -2,12 +2,20 @@
 
 namespace Samples.Functional
 {
-    public static class SqlTemplates
+    public class Sql // TODO:
     {
-        public static readonly SqlTemplate InsertIntoBookTransfers = $"{InsertInto} [dbo].[BookTransfers]([Amount],[Beneficiary],[Bic],[Date],[DebitedAccountId],[Iban],[Reference],[Timestamp]) VALUES(@Amount,@Beneficiary,@Bic,@Date,@DebitedAccountId,@Iban,@Reference,@Timestamp)";
+        //public static readonly SqlTemplate InsertIntoBookTransfers = $"{InsertInto} {BookTransfers}({BookTransferColumns}) VALUES(@Amount,@Beneficiary,@Bic,@Date,@DebitedAccountId,@Iban,@Reference,@Timestamp)";
 
-        public static readonly SqlTemplate q = "SELECT * FROM [dbo].[BookTransfers] WHERE Id=@Id"; // TODO: Continue with this
+        private const string BookTransferColumns = "[Amount],[Beneficiary],[Bic],[Date],[DebitedAccountId],[Iban],[Reference],[Timestamp]";
 
-        private static readonly string InsertInto = "INSERT INTO";
+        private const string BookTransfers = "[dbo].[BookTransfers]";
+
+        private const string InsertInto = "INSERT INTO";
+
+        public static SqlTemplate InsertIntoBookTransfers => $"{InsertInto} {BookTransfers}({BookTransferColumns}) VALUES(@Amount,@Beneficiary,@Bic,@Date,@DebitedAccountId,@Iban,@Reference,@Timestamp)";
+
+        public static SqlTemplate SelectBookTransferFromId => $"{SelectBookTransfers} WHERE Id=@Id";
+
+        public static SqlTemplate SelectBookTransfers => $"SELECT {BookTransferColumns} FROM {BookTransfers}";
     }
 }
