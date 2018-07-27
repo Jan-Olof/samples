@@ -12,10 +12,12 @@ namespace Samples.Functional
 
         private const string InsertInto = "INSERT INTO";
 
+        private static string BookTransferColumnsWithId = $"[Id],{BookTransferColumns}";
+
         public static SqlTemplate InsertIntoBookTransfers => $"{InsertInto} {BookTransfers}({BookTransferColumns}) VALUES(@Amount,@Beneficiary,@Bic,@Date,@DebitedAccountId,@Iban,@Reference,@Timestamp)";
 
         public static SqlTemplate SelectBookTransferFromId => $"{SelectBookTransfers} WHERE Id=@Id";
 
-        public static SqlTemplate SelectBookTransfers => $"SELECT {BookTransferColumns} FROM {BookTransfers}";
+        public static SqlTemplate SelectBookTransfers => $"SELECT {BookTransferColumnsWithId} FROM {BookTransfers}";
     }
 }

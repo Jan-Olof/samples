@@ -6,6 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 
+using static Samples.Functional.Transfer.TransferInteractor;
+
 namespace Samples.FunctionalWebApi.Controllers
 {
     /// <summary>
@@ -35,17 +37,21 @@ namespace Samples.FunctionalWebApi.Controllers
             _now = now;
         }
 
+        /// <summary>
+        /// Get a transfer from id.
+        /// </summary>
         [HttpGet("{id}")]
         public IActionResult GetTransfer(int id)
-        {
-            return id.GetFromId(_queries).Match(OnFaulted, Ok); // TODO: Continue with this
-        }
+            => id.GetFromId(_queries)
+                .Match(OnFaulted, Ok); // TODO: Handle not found.
 
+        /// <summary>
+        /// Get all transfers.
+        /// </summary>
         [HttpGet]
         public IActionResult GetTransfers()
-        {
-            return Ok(new object()); // TODO: Continue with this
-        }
+            => GetAll(_queries)
+                .Match(OnFaulted, Ok);
 
         /// <summary>
         /// Make a transfer.

@@ -22,6 +22,22 @@ namespace Samples.Functional.Helpers
             return result;
         }
 
+        public static Exceptional<TR> Query<TR>(Func<object, TR> query)
+        {
+            TR result;
+
+            try
+            {
+                result = query(new object());
+            }
+            catch (Exception ex)
+            {
+                return ex;
+            }
+
+            return result;
+        }
+
         /// <summary>
         /// Persist an object to the data store.
         /// </summary>
