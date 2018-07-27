@@ -4,6 +4,7 @@ using Samples.Functional.Helpers;
 using Samples.Functional.Transfer;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 
 using static Samples.Functional.Transfer.TransferInteractor;
@@ -40,18 +41,27 @@ namespace Samples.FunctionalWebApi.Controllers
         /// <summary>
         /// Get a transfer from id.
         /// </summary>
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.NoContent)]
+        [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
         [HttpGet("{id}")]
         public IActionResult GetTransfer(int id)
             => id.GetFromId(_queries)
-                .Match(OnFaulted, Ok); // TODO: Handle not found.
+                .Match(
+                    OnFaulted,
+                    result => Ok(result.FirstOrDefault()));
 
         /// <summary>
         /// Get all transfers.
         /// </summary>
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
         [HttpGet]
         public IActionResult GetTransfers()
             => GetAll(_queries)
-                .Match(OnFaulted, Ok);
+                .Match(
+                    OnFaulted,
+                    Ok);
 
         /// <summary>
         /// Make a transfer.
