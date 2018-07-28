@@ -17,6 +17,8 @@ namespace Samples.Functional
 
         private static SqlTemplate InsertIntoBookTransfers => $"{InsertInto} {BookTransfers}({BookTransferColumns}) VALUES(@Amount,@Beneficiary,@Bic,@Date,@DebitedAccountId,@Iban,@Reference,@Timestamp)";
 
+        private static SqlTemplate SelectBookTransferFromIban => $"{SelectBookTransfers} WHERE Iban=@Iban";
+
         private static SqlTemplate SelectBookTransferFromId => $"{SelectBookTransfers} WHERE Id=@Id";
 
         private static SqlTemplate SelectBookTransfers => $"SELECT {BookTransferColumnsWithId} FROM {BookTransfers}";
@@ -33,6 +35,9 @@ namespace Samples.Functional
 
                 case SqlEnum.SelectBookTransferFromId:
                     return SelectBookTransferFromId;
+
+                case SqlEnum.SelectBookTransferFromIban:
+                    return SelectBookTransferFromIban;
 
                 default:
                     throw new ArgumentOutOfRangeException("t");

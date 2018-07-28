@@ -4,6 +4,7 @@
     {
         InsertIntoBookTransfers,
         SelectBookTransfers,
-        SelectBookTransferFromId
+        SelectBookTransferFromId,
+        SelectBookTransferFromIban
     }
 }

@@ -45,8 +45,8 @@ namespace Samples.FunctionalWebApi.Controllers
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
         [HttpGet("{id}")]
-        public IActionResult GetTransfer(int id)
-            => id.GetFrom(_queries, SqlEnum.SelectBookTransferFromId)
+        public IActionResult GetTransferFromId(int id)
+            => GetFrom(_queries, SqlEnum.SelectBookTransferFromId, new { Id = id })
                 .Match(
                     OnFaulted,
                     result => Ok(result.FirstOrDefault()));
@@ -59,6 +59,18 @@ namespace Samples.FunctionalWebApi.Controllers
         [HttpGet]
         public IActionResult GetTransfers()
             => GetAll(_queries)
+                .Match(
+                    OnFaulted,
+                    Ok);
+
+        /// <summary>
+        /// Get all transfers from an iban.
+        /// </summary>
+        [ProducesResponseType(typeof(IEnumerable<BookTransferDto>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
+        [HttpGet("iban/{iban}")]
+        public IActionResult GetTransfersFromIban(string iban)
+            => GetFrom(_queries, SqlEnum.SelectBookTransferFromIban, new { Iban = iban })
                 .Match(
                     OnFaulted,
                     Ok);

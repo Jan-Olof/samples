@@ -21,9 +21,8 @@ namespace Samples.Functional.Transfer
             => Query(queries.Apply(GetSqlTemplate(SqlEnum.SelectBookTransfers)))
                 .Map(daos => daos.Map(dao => dao.CreateBookTransferDto()));
 
-        public static Exceptional<IEnumerable<BookTransferDto>> GetFrom<T>(this T t, Func<SqlTemplate, object, IEnumerable<BookTransferDao>> queries, SqlEnum query)
-            => new { Id = t }
-                .Query(queries.Apply(GetSqlTemplate(query)))
+        public static Exceptional<IEnumerable<BookTransferDto>> GetFrom<T>(Func<SqlTemplate, object, IEnumerable<BookTransferDao>> queries, SqlEnum query, T t)
+            => t.Query(queries.Apply(GetSqlTemplate(query)))
                 .Map(daos => daos.Map(dao => dao.CreateBookTransferDto()));
     }
 }
