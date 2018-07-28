@@ -21,15 +21,16 @@ namespace Samples.Functional.Transfer
                 bookTransfer.ReferenceOfTransfer.Value,
                 bookTransfer.TimestampOfTransfer.Value);
 
-        public static BookTransferDto CreateBookTransferDto(this BookTransfer bookTransfer)
+        public static BookTransferDto CreateBookTransferDto(this BookTransferDao bookTransfer)
             => new BookTransferDto(
-                bookTransfer.AmountToTransfer.Value,
-                bookTransfer.BeneficiaryOfTransfer.Value,
-                bookTransfer.BicCode.Value,
-                bookTransfer.DateOfTransfer.Value,
-                bookTransfer.DebitedAccountId.Value.ToString(),
-                bookTransfer.InternationalBankAccountNumber.Value,
-                bookTransfer.ReferenceOfTransfer.Value,
-                bookTransfer.TimestampOfTransfer.Value);
+                bookTransfer.Amount,
+                bookTransfer.Beneficiary,
+                bookTransfer.Bic,
+                bookTransfer.Date,
+                bookTransfer.DebitedAccountId.ToString(),
+                bookTransfer.Iban,
+                bookTransfer.Id,
+                bookTransfer.Reference,
+                bookTransfer.Timestamp);
     }
 }

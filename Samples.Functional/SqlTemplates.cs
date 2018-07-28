@@ -1,4 +1,5 @@
 ﻿using Samples.Functional.Helpers;
+using System;
 
 namespace Samples.Functional
 {
@@ -14,10 +15,28 @@ namespace Samples.Functional
 
         private static string BookTransferColumnsWithId = $"[Id],{BookTransferColumns}";
 
-        public static SqlTemplate InsertIntoBookTransfers => $"{InsertInto} {BookTransfers}({BookTransferColumns}) VALUES(@Amount,@Beneficiary,@Bic,@Date,@DebitedAccountId,@Iban,@Reference,@Timestamp)";
+        private static SqlTemplate InsertIntoBookTransfers => $"{InsertInto} {BookTransfers}({BookTransferColumns}) VALUES(@Amount,@Beneficiary,@Bic,@Date,@DebitedAccountId,@Iban,@Reference,@Timestamp)";
 
-        public static SqlTemplate SelectBookTransferFromId => $"{SelectBookTransfers} WHERE Id=@Id";
+        private static SqlTemplate SelectBookTransferFromId => $"{SelectBookTransfers} WHERE Id=@Id";
 
-        public static SqlTemplate SelectBookTransfers => $"SELECT {BookTransferColumnsWithId} FROM {BookTransfers}";
+        private static SqlTemplate SelectBookTransfers => $"SELECT {BookTransferColumnsWithId} FROM {BookTransfers}";
+
+        public static SqlTemplate GetSqlTemplate(SqlEnum t)
+        {
+            switch (t)
+            {
+                case SqlEnum.InsertIntoBookTransfers:
+                    return InsertIntoBookTransfers;
+
+                case SqlEnum.SelectBookTransfers:
+                    return SelectBookTransfers;
+
+                case SqlEnum.SelectBookTransferFromId:
+                    return SelectBookTransferFromId;
+
+                default:
+                    throw new ArgumentOutOfRangeException("t");
+            }
+        }
     }
 }

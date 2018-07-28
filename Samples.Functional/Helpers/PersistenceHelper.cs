@@ -2,6 +2,8 @@
 using System;
 using static LaYumba.Functional.F;
 
+using Unit = System.ValueTuple;
+
 namespace Samples.Functional.Helpers
 {
     public static class PersistenceHelper
@@ -41,7 +43,7 @@ namespace Samples.Functional.Helpers
         /// <summary>
         /// Persist an object to the data store.
         /// </summary>
-        public static Exceptional<ValueTuple> Save<T>(this T o, Func<T, int> insert)
+        public static Exceptional<Unit> Save<T>(this T o, Func<T, int> insert)
         {
             try
             {

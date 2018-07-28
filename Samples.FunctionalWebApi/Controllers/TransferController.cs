@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Samples.Functional;
 using Samples.Functional.Helpers;
 using Samples.Functional.Transfer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-
 using static Samples.Functional.Transfer.TransferInteractor;
 
 namespace Samples.FunctionalWebApi.Controllers
@@ -41,12 +41,12 @@ namespace Samples.FunctionalWebApi.Controllers
         /// <summary>
         /// Get a transfer from id.
         /// </summary>
-        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(BookTransferDto), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
         [HttpGet("{id}")]
         public IActionResult GetTransfer(int id)
-            => id.GetFromId(_queries)
+            => id.GetFrom(_queries, SqlEnum.SelectBookTransferFromId)
                 .Match(
                     OnFaulted,
                     result => Ok(result.FirstOrDefault()));
@@ -54,7 +54,7 @@ namespace Samples.FunctionalWebApi.Controllers
         /// <summary>
         /// Get all transfers.
         /// </summary>
-        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(IEnumerable<BookTransferDto>), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
         [HttpGet]
         public IActionResult GetTransfers()

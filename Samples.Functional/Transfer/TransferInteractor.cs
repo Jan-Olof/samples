@@ -15,12 +15,15 @@ namespace Samples.Functional.Transfer
                 .CreateBookTransfer(now)
                 .Map(t => t
                     .CreateBookTransferDao()
-                    .Save(commands.Apply(InsertIntoBookTransfers)));
+                    .Save(commands.Apply(GetSqlTemplate(SqlEnum.InsertIntoBookTransfers))));
 
-        public static Exceptional<IEnumerable<BookTransferDao>> GetAll(Func<SqlTemplate, object, IEnumerable<BookTransferDao>> queries)
-            => Query(queries.Apply(SelectBookTransfers));
+        public static Exceptional<IEnumerable<BookTransferDto>> GetAll(Func<SqlTemplate, object, IEnumerable<BookTransferDao>> queries)
+            => Query(queries.Apply(GetSqlTemplate(SqlEnum.SelectBookTransfers)))
+                .Map(daos => daos.Map(dao => dao.CreateBookTransferDto()));
 
-        public static Exceptional<IEnumerable<BookTransferDao>> GetFromId(this int id, Func<SqlTemplate, object, IEnumerable<BookTransferDao>> queries) // TODO: Generalize?
-            => new { Id = id }.Query(queries.Apply(SelectBookTransferFromId));
+        public static Exceptional<IEnumerable<BookTransferDto>> GetFrom<T>(this T t, Func<SqlTemplate, object, IEnumerable<BookTransferDao>> queries, SqlEnum query)
+            => new { Id = t }
+                .Query(queries.Apply(GetSqlTemplate(query)))
+                .Map(daos => daos.Map(dao => dao.CreateBookTransferDto()));
     }
 }

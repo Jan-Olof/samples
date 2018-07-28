@@ -4,7 +4,7 @@ namespace Samples.Functional.Transfer
 {
     public class BookTransferDto
     {
-        public BookTransferDto(decimal amount, string beneficiary, string bic, DateTime date, string debitedAccountId, string iban, string reference, DateTime timestamp)
+        public BookTransferDto(decimal amount, string beneficiary, string bic, DateTime date, string debitedAccountId, string iban, int id, string reference, DateTime timestamp)
         {
             Amount = amount;
             Beneficiary = beneficiary;
@@ -12,6 +12,7 @@ namespace Samples.Functional.Transfer
             Date = date;
             DebitedAccountId = debitedAccountId;
             Iban = iban;
+            Id = id;
             Reference = reference;
             Timestamp = timestamp;
         }
@@ -22,6 +23,7 @@ namespace Samples.Functional.Transfer
         public DateTime Date { get; }
         public string DebitedAccountId { get; }
         public string Iban { get; }
+        public int Id { get; }
         public string Reference { get; }
         public DateTime Timestamp { get; }
     }
