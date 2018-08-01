@@ -11,13 +11,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.1.2" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="2.1.1" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.8.0" />
     <PackageReference Include="MSTest.TestAdapter" Version="1.3.2" />
     <PackageReference Include="MSTest.TestFramework" Version="1.3.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Samples.Functional\Samples.Functional.csproj" />
+    <ProjectReference Include="..\Samples.Functional.Tests\Samples.Functional.Tests.csproj" />
+    <ProjectReference Include="..\Samples.FunctionalWebApi\Samples.FunctionalWebApi.csproj" />
   </ItemGroup>
 
 </Project>

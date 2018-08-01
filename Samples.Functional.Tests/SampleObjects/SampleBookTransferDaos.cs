@@ -1,5 +1,6 @@
 ﻿using Samples.Functional.Transfer;
 using System;
+using System.Collections.Generic;
 
 namespace Samples.Functional.Tests.SampleObjects
 {
@@ -19,5 +20,8 @@ namespace Samples.Functional.Tests.SampleObjects
 
         public static BookTransferDao CreateBookTransferDao()
             => new BookTransferDao(0, "", "", new DateTime(), Guid.Empty, "", 0, "", new DateTime());
+
+        public static IEnumerable<BookTransferDao> CreateBookTransferDaos()
+            => new List<BookTransferDao> { CreateBookTransferDao(new DateTime(2018, 6, 2)) };
     }
 }

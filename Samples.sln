@@ -15,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Samples.Functional", "Sampl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Samples.Functional.Tests", "Samples.Functional.Tests\Samples.Functional.Tests.csproj", "{F0EC2BC8-B2ED-4CC9-A81F-951554F0E4DA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Samples.FunctionalWebApi", "Samples.FunctionalWebApi\Samples.FunctionalWebApi.csproj", "{96F9277C-41C2-43EA-834C-7DFAE137BE37}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Samples.FunctionalWebApi", "Samples.FunctionalWebApi\Samples.FunctionalWebApi.csproj", "{96F9277C-41C2-43EA-834C-7DFAE137BE37}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Samples.FunctionalWebApi.Tests", "Samples.FunctionalWebApi.Tests\Samples.FunctionalWebApi.Tests.csproj", "{E8BC1F52-2892-40A6-9F8E-CF9872751D19}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{96F9277C-41C2-43EA-834C-7DFAE137BE37}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{96F9277C-41C2-43EA-834C-7DFAE137BE37}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{96F9277C-41C2-43EA-834C-7DFAE137BE37}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8BC1F52-2892-40A6-9F8E-CF9872751D19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8BC1F52-2892-40A6-9F8E-CF9872751D19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8BC1F52-2892-40A6-9F8E-CF9872751D19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8BC1F52-2892-40A6-9F8E-CF9872751D19}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -10,13 +10,17 @@
     <DocumentationFile>bin\Debug\netcoreapp2.0\Samples.WebApi.xml</DocumentationFile>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <RuntimeFrameworkVersion>2.1.2</RuntimeFrameworkVersion>
+  </PropertyGroup>
+
   <ItemGroup>
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="7.0.1" />
-    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="4.0.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="5.0.1" />
     <PackageReference Include="Dapper" Version="1.50.5" />
     <PackageReference Include="LaYumba.Functional" Version="0.9.1" />
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.3.0" />
