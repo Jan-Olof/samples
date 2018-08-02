@@ -2,7 +2,7 @@
 
 namespace Samples.Functional.Transfer
 {
-    public class BookTransferDto
+    public class BookTransferDto // TODO: More immutable stuff (with). Private constructor and factory methods.
     {
         public BookTransferDto(decimal amount, string beneficiary, string bic, DateTime date, string debitedAccountId, string iban, int id, string reference, DateTime timestamp)
         {

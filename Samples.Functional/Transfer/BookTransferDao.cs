@@ -2,7 +2,7 @@
 
 namespace Samples.Functional.Transfer
 {
-    public class BookTransferDao
+    public class BookTransferDao // TODO: More immutable stuff (with). Private constructor and factory methods.
     {
         [Obsolete("Default constructor only here for the ORM", true)]
         public BookTransferDao()
