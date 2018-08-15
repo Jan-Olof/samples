@@ -40,7 +40,7 @@ namespace Samples.Functional
                     return SelectBookTransferFromIban;
 
                 default:
-                    throw new ArgumentOutOfRangeException("t");
+                    throw new ArgumentOutOfRangeException(nameof(t));
             }
         }
     }
